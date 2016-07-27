@@ -1,0 +1,15 @@
+#!/bin/bash
+
+goRoot=/go/src/github.com/carltonj2000
+buildDirs=(cjUtils cjWebserverPower)
+
+while true; do
+  for dirs in ${buildDirs[@]}; do
+    cd ${goRoot}/${dirs}
+    go get -d -v
+    go install -v
+  done
+
+  cd /usr/share/nginx/html
+  exec /go/bin/cjWebserverPower
+done
